@@ -1,0 +1,4 @@
+public void w1(View v) {
+        Intent i = new Intent(this, ww1.class);
+        startActivity(i);
+        }
