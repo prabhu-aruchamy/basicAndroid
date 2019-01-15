@@ -1,0 +1,2 @@
+Indent indent = new Indent(MainActivity.this,SecondActivity.class);
+startActivity(indent);
