@@ -1,0 +1,38 @@
+    if (ContextCompat.checkSelfPermission(ThumbnailDownloadActivity.this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+
+                    ActivityCompat.requestPermissions(ThumbnailDownloadActivity.this,
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            1);
+                }
+                //Download Code:
+
+             drawable = (BitmapDrawable)imageView.getDrawable();
+             bitmap=drawable.getBitmap();
+
+             File sdcard = Environment.getExternalStorageDirectory();
+             File directory = new File(sdcard.getAbsolutePath() + "/YouTool");
+             directory.mkdir();
+
+             String filename = String.format("%d.png",System.currentTimeMillis());
+             File outFile = new File(directory,filename);
+                Toast.makeText(ThumbnailDownloadActivity.this, "Image Saved Sucessfully", Toast.LENGTH_SHORT).show();
+
+             try {
+                 outputStream = new FileOutputStream(outFile);
+                 bitmap.compress(Bitmap.CompressFormat.PNG, 100,outputStream);
+                 outputStream.flush();
+                 outputStream.close();
+
+                 Intent intent1 = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                 intent1.setData(Uri.fromFile(outFile));
+                 sendBroadcast(intent1);
+
+             }
+             catch (Exception e){
+
+                 e.printStackTrace();
+             }
+
+            }
