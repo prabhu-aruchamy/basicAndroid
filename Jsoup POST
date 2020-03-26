@@ -1,0 +1,18 @@
+                Document doc = Jsoup.connect("https://online-free-tools.com/en/youtube_video_tags_extract_url")
+                        .data("data", "https://youtu.be/_b2Jtjju72U")
+                        .data("parse", "parse")
+                        .userAgent("Mozilla/5.0")
+                        .post();
+                        
+                        (OR)
+                        
+                Connection.Response response =
+                        Jsoup.connect("https://online-free-tools.com/en/youtube_video_tags_extract_url")
+                                .data("data", "https://youtu.be/_b2Jtjju72U")
+                                .data("parse", "parse")
+                                .userAgent("Mozilla/5.0")
+                                .method(Connection.Method.POST)
+                                .ignoreHttpErrors(true)
+                                .execute();
+                                
+                Document doc = response.parse();
